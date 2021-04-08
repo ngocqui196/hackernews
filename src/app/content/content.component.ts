@@ -1,5 +1,9 @@
-import {Component, Input, OnInit, Output,EventEmitter} from '@angular/core';
-
+import {Component, Input, OnInit, Output, EventEmitter, SimpleChanges} from '@angular/core';
+import {FormGroup} from '@angular/forms';
+interface IRatingUnit {
+  value: number;
+  active: boolean;
+}
 
 @Component({
   selector: 'app-content',
@@ -15,10 +19,57 @@ export class ContentComponent implements OnInit {
   @Input() time = 3;
 
   text = "20px";
+
+  @Input()
+  max = 10;
+  @Input()
+  ratingValue = 10;
+  @Input()
+  showRatingValue = true;
+
+  @Output()
+  rateChange = new EventEmitter<number>();
+
+  ratingUnits: Array<IRatingUnit> = [];
+
+  clientForm: FormGroup;
+
+
   constructor() { }
 
-  ngOnInit(): void {
+  ngOnChanges(changes: SimpleChanges) {
+    if ('max' in changes) {
+      let max = changes.max.currentValue;
+      max = typeof max === 'undefined' ? 10 : max;
+      this.max = max;
+      this.calculate(max, this.ratingValue);
+    }
   }
+
+  calculate(max, ratingValue) {
+    this.ratingUnits = Array.from({length: max},
+      (_, index) => ({
+        value: index + 1,
+        active: index < ratingValue
+      }));
+  }
+
+  ngOnInit() {
+    this.calculate(this.max, this.ratingValue);
+  }
+
+  select(index) {
+    this.ratingValue = index + 1;
+    this.ratingUnits.forEach((item, idx) => item.active = idx < this.ratingValue);
+    this.rateChange.emit(this.ratingValue);
+  }
+  enter(index) {
+    this.ratingUnits.forEach((item, idx) => item.active = idx <= index);
+  }
+  reset() {
+    this.ratingUnits.forEach((item, idx) => item.active = idx < this.ratingValue);
+  }
+
 
   // get second() {
   //   return this.time;

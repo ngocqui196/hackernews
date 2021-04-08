@@ -1,0 +1,14 @@
+<form (ngSubmit)="onSubmit()" [formGroup]="article">
+  <input type="number" formControlName="id" placeholder="Enter id">
+  <input type="text" formControlName="name" placeholder="Enter name">
+  <input type="text" formControlName="center" placeholder="Enter center">
+  <input type="button" (click)="onSubmit()" value="Submit">
+</form>
+<!--<div-->
+<!--&gt;-->
+<!--  <input type="text" [ngModel]="id">-->
+<!--  <input type="text" [ngModel]="name">-->
+<!--  <input type="button" (click)="onSubmit()" >-->
+
+<!--</div>
+-->

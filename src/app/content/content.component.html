@@ -1,4 +1,39 @@
+
+
 <div class="bg-primary" style="height: 300px">
+  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+    Create form
+  </button>
+
+  <!-- The Modal -->
+  <div class="modal" id="myModal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">Create</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+
+        <!-- Modal body -->
+        <div class="modal-body">
+          <form novalidate >
+            <input type="text" class="form-control text-body" placeholder="Enter center">
+          </form>
+
+        </div>
+
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <hr>
   <h2>Progress Bar</h2>
   <div class="progress-bar-container" [style.backgroundColor]="backgroundColor">
     <div class="progress" [ngStyle]="{
@@ -15,4 +50,18 @@
 
   <button (click)="stop()">stop</button>
 </div>
+<hr>
+<h2>Rating Bar</h2>
+<div *ngIf="showRatingValue">
+  {{ ratingValue }}
+</div>
 
+<div class="rating-bar " (mouseleave)="reset()">
+  <div class="rating-unit btn btn-info"
+       [class.active]="item.active"
+       *ngFor="let item of ratingUnits; index as i"
+       (click)="select(i)" (mouseenter)="enter(i)">
+    {{ item.value }}
+  </div>
+</div>
+<hr>
