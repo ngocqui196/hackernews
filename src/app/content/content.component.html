@@ -1,1 +1,18 @@
-<div class="bg-primary" style="height: 80px"> đây là content</div>
+<div class="bg-primary" style="height: 300px">
+  <h2>Progress Bar</h2>
+  <div class="progress-bar-container" [style.backgroundColor]="backgroundColor">
+    <div class="progress" [ngStyle]="{
+  backgroundColor: progressColor,
+  width: width + '%',
+   fontSize: text}">
+      phần này
+    </div>
+  </div>
+
+  {{time}}
+
+  <button (click)="startTime()">start</button>
+
+  <button (click)="stop()">stop</button>
+</div>
+

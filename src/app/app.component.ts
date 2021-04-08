@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, Input} from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -6,6 +6,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+  input1: string = 'Professional Dev';
+  input2: string = 'prodev@abc.xyz';
+  input3: string = '0123456789';
 article1 = {
     title:'link 1',
     url: 'https://www.facebook.com/'
@@ -58,4 +61,8 @@ article5 = {
   //   this.articles.push(this.article);
   //   console.log(this.article.title)
   // }
+  isFinish = '';
+  finishCoundown() {
+    this.isFinish = 'Ket thuc';
+  }
 }
